@@ -1,29 +1,29 @@
-"use client"
-import ImageKit from "./components/ImageKit";
-import { Image } from '@imagekit/next';
-
-const IMAGE = 'https://ik.imagekit.io/ross406/izuku_midoriya_on_building_top_blue_sky_background_4k_hd_my_hero_academia_57immr1rVP.jpg?updatedAt=1752680879129'
+"use client";
+import { useEffect, useState } from "react";
+import { IVideo } from "@/models/Video";
+import { apiClient } from "@/lib/api-client";
+import VideoFeed from "./components/VideoFeed";
 
 export default function Home() {
+  const [videos, setVideos] = useState<IVideo[]>([]);
 
-  const onSuccess = (res) => {
-    console.log('ImageKit upload success',res);
+  useEffect(() => {
+    const fetchVideos = async () => {
+      try {
+        const data = await apiClient.getVideos();
+        setVideos(data);
+        console.log("@@@data", data);
+      } catch (error) {
+        console.error("Error Fetching Videos", error);
+      }
+    };
+    fetchVideos();
+  }, []);
 
-  }
   return (
-   <>
-      <ImageKit onSuccess={onSuccess}/>
-       <Image
-        urlEndpoint={process.env.NEXT_PUBLIC_URL_ENDPOINT}
-        src={IMAGE}
-        width={500}
-        height={500}
-        alt="Picture of the author"
-        loading="lazy"
-        // transformation={[{ width: 500, height: 500 }]}
-      />
-
-      
-     </> 
+    <main className="container mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold mb-8">ImageKit ReelsPro</h1>
+      <VideoFeed videos={videos} />
+    </main>
   );
 }

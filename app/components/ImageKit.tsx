@@ -13,7 +13,7 @@ import { useRef, useState } from "react";
 
 interface FileUploadProps {
     onSuccess: (url: UploadResponse) => void;
-    onProgress?: (progress: number) => void;
+    onProgress: (progress: number) => void;
     fileType?: "image" | "video";
 }
 
@@ -145,7 +145,7 @@ const UploadExample = ({
                 // Progress callback to update upload progress state
                 onProgress: (event) => {
                     setProgress((event.loaded / event.total) * 100);
-                    // onProgress((event.loaded / event.total) * 100);
+                    onProgress((event.loaded / event.total) * 100);
                 },
                 // Abort signal to allow cancellation of the upload if needed.
                 abortSignal: abortController.signal,

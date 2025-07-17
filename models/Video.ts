@@ -16,7 +16,7 @@ export interface IVideo {
   transformation?: {
     height: number;
     width: number;
-    quantity?: number;
+    quality?: number;
   };
   createdAt?: Date;
   updatedAt?: Date;
@@ -32,7 +32,7 @@ const videoSchema = new Schema<IVideo>(
     transformation: {
       height: { type: Number, default: VIDEO_DIMENSIONS.height },
       width: { type: Number, default: VIDEO_DIMENSIONS.width },
-      quantity: { type: Number, min: 1, max: 100 },
+      quality: { type: Number, min: 1, max: 100 },
     },
   },
   {
