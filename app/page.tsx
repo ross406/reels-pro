@@ -11,8 +11,9 @@ export default function Home() {
     const fetchVideos = async () => {
       try {
         const data = await apiClient.getVideos();
-        setVideos(data);
-        console.log("@@@data", data);
+        if(Array.isArray(data)) {
+          setVideos(data);
+        }
       } catch (error) {
         console.error("Error Fetching Videos", error);
       }

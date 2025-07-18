@@ -20,7 +20,7 @@ const Login = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const result = await signIn("credentials", {
-      email,
+      email:email.trim().toLowerCase(),
       password,
       redirect: false,
     });

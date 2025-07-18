@@ -3,7 +3,7 @@ import Link from "next/link";
 import { IVideo } from "@/models/Video";
 import { Video } from "@imagekit/next";
 
-export default function VideoComponent({ video }: { video: IVideo }) {
+export default function VideoComponent({ video, autoPlay=false }: { video: IVideo, autoPlay: boolean }) {
   return (
     <div className="card bg-base-100 shadow hover:shadow-lg transition-all duration-300">
       <figure className="relative px-4 pt-4">
@@ -15,13 +15,13 @@ export default function VideoComponent({ video }: { video: IVideo }) {
             <Video
               className="w-full h-full object-cover"
               urlEndpoint={process.env.NEXT_PUBLIC_URL_ENDPOINT}
-              src={
-                "https://ik.imagekit.io/ross406/videos/Beautiful_nature_sMvXP9HZq.mp4?updatedAt=1752772469614"
-              }
-              // src={video.videoUrl}
+              src={video.videoUrl}
               controls={video.controls}
               width={500}
               height={500}
+              autoPlay={autoPlay}
+              loop={autoPlay}
+              playsInline
               transformation={[
                 {
                   height: "1920",
